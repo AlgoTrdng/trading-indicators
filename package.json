@@ -1,6 +1,6 @@
 {
   "name": "trading-indicators",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JS Library for trading indicators",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "dmc0125",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Dmc0125/trading-indicators/issues"
   },
