@@ -1,6 +1,5 @@
 /**
- * @function twap
- * @describe Returns twap from values provided
+ * Returns twap from values provided
  *
  * @param {{ o: number, h: number, l: number, c: number }[]} ohlc Array of open, high, low, close values with length of desired time period
  *
