@@ -1,9 +1,9 @@
-const twap = require('./twap');
-const ma = require('./moving-average');
-const ema = require('./exponential-moving-average');
+const MA = require('./src/moving-average');
+const EMA = require('./src/exponential-moving-average');
+// const rsi = require('./src/rsi');
 
 module.exports = {
-  twap,
-  ma,
-  ema,
+  MA,
+  EMA,
+  // rsi,
 };

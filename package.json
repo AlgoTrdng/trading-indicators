@@ -1,8 +1,9 @@
 {
   "name": "trading-indicators",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "JS Library for trading indicators",
   "main": "index.js",
+  "types": "types/types.d.ts",
   "scripts": {
     "test": "node test/test.js"
   },
@@ -20,6 +21,10 @@
   "devDependencies": {
     "eslint": "^7.23.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "ftx-api-nodejs": "^0.0.7"
+  },
+  "dependencies": {
+    "binance-api-nodejs": "^0.0.13"
   }
 }
