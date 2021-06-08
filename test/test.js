@@ -16,6 +16,8 @@ const test = async (_exchange) => {
     const _length = 20;
     const startCandles = candlesticks.slice(0, _length + 20).map(({ c }) => c);
 
+    // console.log(startCandles);
+
     const ma = new MA({
       numbers: startCandles,
       len: _length,
@@ -33,14 +35,14 @@ const test = async (_exchange) => {
       len: _length,
     });
 
-    for (let i = _length; i < candlesticks.slice(0, -1).length; i += 1) {
-      const { c } = candlesticks[i];
+    // for (let i = _length; i < candlesticks.slice(0, -1).length; i += 1) {
+    //   const { c } = candlesticks[i];
 
-      ma.update(c);
-      ema.update(c);
-      wma.update(c);
-      hma.update(c);
-    }
+    //   ma.update(c);
+    //   ema.update(c);
+    //   wma.update(c);
+    //   hma.update(c);
+    // }
 
     console.log('MA:', ma.getMovingAverage());
     console.log('EMA:', ema.getMovingAverage());

@@ -22,6 +22,8 @@ class WMA extends MA {
         return true;
       },
     });
+
+    this._setWmaValue(this._numbers.value);
   }
 
   _setNorm() {

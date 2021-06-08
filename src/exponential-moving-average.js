@@ -22,6 +22,8 @@ class EMA extends MA {
         return true;
       },
     });
+
+    this._setEmaValue(this._numbers.value);
   }
 
   _setEmaValue(numbers) {

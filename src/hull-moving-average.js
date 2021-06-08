@@ -24,6 +24,8 @@ class HMA extends MA {
         return true;
       },
     });
+
+    this._setHmaValue(this._numbers.value);
   }
 
   _setWmas() {

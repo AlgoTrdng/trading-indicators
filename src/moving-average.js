@@ -18,6 +18,8 @@ class MA {
         return true;
       },
     });
+
+    this._setMaValue(this._numbers.value);
   }
 
   update(number) {
@@ -31,11 +33,11 @@ class MA {
   }
 
   _setMaValue(numbers) {
-    if (numbers.length < this._len) {
+    if (!numbers || numbers.length < this._len) {
       return;
     }
 
-    this._movingAverage = numbers.reduce((ma, number) => ma + number, 0) / this._len;
+    this._movingAverage = numbers.slice(numbers.length - this._len, numbers.length).reduce((ma, number) => ma + number, 0) / this._len;
   }
 }
 
