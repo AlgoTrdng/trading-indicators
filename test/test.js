@@ -35,14 +35,14 @@ const test = async (_exchange) => {
       len: _length,
     });
 
-    // for (let i = _length; i < candlesticks.slice(0, -1).length; i += 1) {
-    //   const { c } = candlesticks[i];
+    for (let i = _length; i < candlesticks.slice(0, -1).length; i += 1) {
+      const { c } = candlesticks[i];
 
-    //   ma.update(c);
-    //   ema.update(c);
-    //   wma.update(c);
-    //   hma.update(c);
-    // }
+      ma.update(c);
+      ema.update(c);
+      wma.update(c);
+      hma.update(c);
+    }
 
     console.log('MA:', ma.getMovingAverage());
     console.log('EMA:', ema.getMovingAverage());
