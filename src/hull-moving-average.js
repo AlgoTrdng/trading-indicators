@@ -20,23 +20,30 @@ class HMA extends MA {
 
         target[prop] = newValue;
         this._setWmas();
-        this._setHmaValue(newValue);
+        this._setHmaValue();
         return true;
       },
     });
 
-    this._setHmaValue(this._numbers.value);
+    this._setWmas();
+    this._setHmaValue();
   }
 
   _setWmas() {
+    if (this._numbers.value.length < this._len + this._hmaLength) {
+      return;
+    }
+
+    const wmaLength = Math.floor(this._len / 2);
+
     if (!this._wmas.length) {
       // Init WMAS
       for (let i = 0; i < this._hmaLength; i += 1) {
-        const numbers = this._numbers.value.slice(0 + i, i + this._len);
+        const numbers = this._numbers.value.slice(0 + i, i + 1 + this._len);
 
         this._wmas = [
           ...this._wmas,
-          2 * WMA.getWma(numbers, Math.floor(this._len / 2)) - WMA.getWma(numbers, this._len),
+          2 * WMA.getWma(numbers.slice(numbers.length - wmaLength), wmaLength) - WMA.getWma(numbers, this._len),
         ];
       }
       return;
@@ -46,15 +53,11 @@ class HMA extends MA {
 
     this._wmas = [
       ...this._wmas.slice(1),
-      2 * WMA.getWma(numbers.slice(numbers.length - Math.floor(this._len / 2)), Math.floor(this._len / 2)) - WMA.getWma(numbers, this._len),
+      2 * WMA.getWma(numbers.slice(numbers.length - wmaLength), wmaLength) - WMA.getWma(numbers, this._len),
     ];
   }
 
   _setHmaValue() {
-    if (this._wmas.length < this._hmaLength) {
-      return;
-    }
-
     this._movingAverage = WMA.getWma(this._wmas, this._hmaLength);
   }
 }

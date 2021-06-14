@@ -11,12 +11,16 @@ const test = async (_exchange) => {
   const exchange = _exchange === 'bnb' ? new Binance() : new Ftx();
 
   try {
-    const candlesticks = await exchange.spot.candlesticks('RAY/USD', '1d', { limit: 50000 });
+    // const candlesticksTotal = await exchange.spot.candlesticks('BTCUSDT', '1m', {
+    //   startTime: 1623673920000 - 1000 * 60 * 60,
+    //   endTime: new Date('2021-06-14T13:31:00.000Z').getTime(),
+    // });
+    const candlesticks = await exchange.spot.candlesticks('BTCUSDT', '1m', { limit: 60 });
 
-    const _length = 20;
-    const startCandles = candlesticks.slice(0, _length + 20).map(({ c }) => c);
+    const _length = 50;
 
-    // console.log(startCandles);
+    const startIndex = _length + 7;
+    const startCandles = candlesticks.slice(0, startIndex).map(({ c }) => c);
 
     const ma = new MA({
       numbers: startCandles,
@@ -35,13 +39,19 @@ const test = async (_exchange) => {
       len: _length,
     });
 
-    for (let i = _length; i < candlesticks.slice(0, -1).length; i += 1) {
-      const { c } = candlesticks[i];
+    for (let i = startIndex; i < candlesticks.slice(0, -1).length; i += 1) {
+      const { c, openTime } = candlesticks[i];
 
       ma.update(c);
       ema.update(c);
       wma.update(c);
       hma.update(c);
+
+      // console.log({
+      //   hma: hma.getMovingAverage(),
+      //   price: c,
+      //   time: new Date(openTime),
+      // });
     }
 
     console.log('MA:', ma.getMovingAverage());
@@ -53,4 +63,4 @@ const test = async (_exchange) => {
   }
 };
 
-test('FTX');
+test('bnb');
