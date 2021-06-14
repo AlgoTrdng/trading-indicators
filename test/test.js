@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-const Ftx = require('ftx-api-nodejs');
 const Binance = require('binance-api-nodejs');
 
 const MA = require('../src/moving-average');
@@ -7,15 +6,15 @@ const EMA = require('../src/exponential-moving-average');
 const WMA = require('../src/weighted-moving-average');
 const HMA = require('../src/hull-moving-average');
 
-const test = async (_exchange) => {
-  const exchange = _exchange === 'bnb' ? new Binance() : new Ftx();
+const test = async () => {
+  const binance = new Binance();
 
   try {
     // const candlesticksTotal = await exchange.spot.candlesticks('BTCUSDT', '1m', {
     //   startTime: 1623673920000 - 1000 * 60 * 60,
     //   endTime: new Date('2021-06-14T13:31:00.000Z').getTime(),
     // });
-    const candlesticks = await exchange.spot.candlesticks('BTCUSDT', '1m', { limit: 60 });
+    const candlesticks = await binance.spot.candlesticks('BTCUSDT', '1m', { limit: 58 });
 
     const _length = 50;
 
@@ -63,4 +62,4 @@ const test = async (_exchange) => {
   }
 };
 
-test('bnb');
+test();

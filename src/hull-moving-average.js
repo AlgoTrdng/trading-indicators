@@ -9,7 +9,7 @@ class HMA extends MA {
     this._wmas = [];
 
     this._numbers = new Proxy({
-      value: numbers,
+      value: [],
     }, {
       set: (target, prop, value) => {
         let newValue = value;
@@ -25,8 +25,7 @@ class HMA extends MA {
       },
     });
 
-    this._setWmas();
-    this._setHmaValue();
+    this._numbers.value = numbers;
   }
 
   _setWmas() {
@@ -39,7 +38,7 @@ class HMA extends MA {
     if (!this._wmas.length) {
       // Init WMAS
       for (let i = 0; i < this._hmaLength; i += 1) {
-        const numbers = this._numbers.value.slice(0 + i, i + 1 + this._len);
+        const numbers = this._numbers.value.slice(1 + i, i + 1 + this._len);
 
         this._wmas = [
           ...this._wmas,
