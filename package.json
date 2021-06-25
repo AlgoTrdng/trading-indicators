@@ -1,11 +1,12 @@
 {
   "name": "@algo-trading/trading-indicators",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "JS Library for trading indicators",
   "main": "index.js",
   "types": "types/types.d.ts",
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "test-rsi": "node src/rsi.test.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
     "eslint": "^7.23.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1"
+  },
+  "dependencies": {
+    "ftx-api-nodejs": "^0.0.11"
   }
 }

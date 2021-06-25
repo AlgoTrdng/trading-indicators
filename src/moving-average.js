@@ -4,9 +4,13 @@ class MA {
 
     this._len = len;
     this._numbers = new Proxy({
-      value: numbers,
+      value: [],
     }, {
       set: (target, prop, value) => {
+        if (value === undefined) {
+          return true;
+        }
+
         let newValue = value;
 
         if (value.length > this._len) {
@@ -19,7 +23,7 @@ class MA {
       },
     });
 
-    this._setMaValue(this._numbers.value);
+    this._numbers.value = numbers;
   }
 
   update(number) {
@@ -38,6 +42,10 @@ class MA {
     }
 
     this._movingAverage = numbers.slice(numbers.length - this._len, numbers.length).reduce((ma, number) => ma + number, 0) / this._len;
+  }
+
+  static getSma(numbers, len) {
+    return numbers.reduce((total, currentNum) => total + currentNum, 0) / len;
   }
 }
 
