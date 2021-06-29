@@ -3,6 +3,7 @@ const EMA = require('./src/exponential-moving-average');
 const WMA = require('./src/weighted-moving-average');
 const HMA = require('./src/hull-moving-average');
 const RSI = require('./src/rsi');
+const StochRSI = require('./src/stoch-rsi');
 
 module.exports = {
   MA,
@@ -10,4 +11,5 @@ module.exports = {
   WMA,
   HMA,
   RSI,
+  StochRSI,
 };
