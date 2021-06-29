@@ -20,13 +20,13 @@ declare namespace TradingIndicators {
   }
 
 
-  namespace EMA {
+  export namespace EMA {
     export interface Options extends MA.Options {
       smoothing?: number;
     }
   }
   
-  class EMA extends MA {
+  export class EMA extends MA {
     constructor({ numbers, len, smoothing }: EMA.Options);
   
     private _alpha;
@@ -34,7 +34,7 @@ declare namespace TradingIndicators {
   }
 
 
-  class WMA extends MA {
+  export class WMA extends MA {
     public static getWma(numbers: number[], len: number): number;
   
     private _norm;
@@ -42,10 +42,56 @@ declare namespace TradingIndicators {
     private _setWmaValue;
   }
 
-  class HMA extends MA {
+  export class HMA extends MA {
     private _hmaLength;
     private _wmas;
     private _setWmas;
     private _setHmaValue;
+  }
+
+  export class RSI {
+    constructor({ numbers, len }: MA.Options);
+
+    private _len;
+    private _rsi;
+    private _prevAvgUp;
+    private _prevAvgDown;
+    private _numbers;
+
+    update(number: number): number;
+    getRsi(): number;
+
+    private _setRsi;
+  }
+
+  export namespace StochRSI {
+    export interface Options {
+      numbers: number[];
+      kLen: number;
+      dLen: number;
+    }
+
+    export type StochRSIAverages = [number | null, number | null];
+  }
+
+  export class StochRSI {
+    constructor({ numbers, kLen, dLen }: StochRSI.Options);
+
+    private _len;
+    private _kLen;
+    private _dLen;
+    private _ks;
+    private _d;
+    private _stochRsis;
+    private _rsi;
+    private _rsis;
+    private _numbers
+
+    update(number: number): StochRSI.StochRSIAverages;
+    getStochRsi(): StochRSI.StochRSIAverages;
+
+    private _setRsi
+    private _setStochRsi
+    private _setStochMas;
   }
 }

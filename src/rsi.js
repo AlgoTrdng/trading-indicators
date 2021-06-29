@@ -5,7 +5,7 @@ const wildersEma = (change, len, prevAvgChange) => ((len - 1) * prevAvgChange + 
 class RSI {
   constructor({ numbers, len }) {
     this._len = len;
-    this._movingAverage = 0;
+    this._rsi = 0;
 
     this._prevAvgUp = null;
     this._prevAvgDown = null;
@@ -31,11 +31,11 @@ class RSI {
   update(number) {
     this._numbers.value = [...this._numbers.value, number];
 
-    return this._movingAverage;
+    return this._rsi;
   }
 
   getRsi() {
-    return this._movingAverage;
+    return this._rsi;
   }
 
   _setRsi(numbers) {
@@ -60,7 +60,7 @@ class RSI {
       this._prevAvgUp = MA.getSma(changes.up, this._len);
       this._prevAvgDown = MA.getSma(changes.down, this._len);
       // eslint-disable-next-line no-nested-ternary
-      this._movingAverage = this._prevAvgUp === 0 ? 0 : this._prevAvgDown === 0 ? 100 : 100 - 100 / (1 + this._prevAvgUp / this._prevAvgDown);
+      this._rsi = this._prevAvgUp === 0 ? 0 : this._prevAvgDown === 0 ? 100 : 100 - 100 / (1 + this._prevAvgUp / this._prevAvgDown);
       return;
     }
 
@@ -73,7 +73,7 @@ class RSI {
     this._prevAvgDown = avgDown;
 
     // eslint-disable-next-line no-nested-ternary
-    this._movingAverage = avgUp === 0 ? 0 : avgDown === 0 ? 100 : 100 - 100 / (1 + avgUp / avgDown);
+    this._rsi = avgUp === 0 ? 0 : avgDown === 0 ? 100 : 100 - 100 / (1 + avgUp / avgDown);
   }
 }
 
