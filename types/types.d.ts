@@ -94,4 +94,49 @@ declare namespace TradingIndicators {
     private _setStochRsi
     private _setStochMas;
   }
+
+  export namespace TR {
+    export type Candlestick = {
+      o?: number;
+      h: number;
+      l: number;
+      c: number;
+    }
+  }
+
+  export class TR {
+    constructor(candlesticks: TR.Candlestick[]);
+
+    private _candlesticks;
+    private _changes;
+    private _initChanges;
+
+    update(candlestick: TR.Candlestick): number;
+    getLast(): number
+    getAllChanges(): number[]
+  
+    static getChanges(candlesticks: TR.Candlestick[]): number[];
+    static getChange(candlesticks: TR.Candlestick[]): number[];
+  }
+
+  export namespace ATR {
+    export type Options = {
+      candlesticks: TR.Candlestick[];
+      len: number;
+    }
+  }
+
+  export class ATR {
+    constructor({ candlesticks, len }: ATR.Options);
+  
+    private _len;
+    private _atr;
+    private _changes;
+    private _prevCandlestick;
+
+    private _setAtr;
+  
+    update(candlestick: TR.Candlestick): number;
+    getAtr(): number;
+  }
 }
