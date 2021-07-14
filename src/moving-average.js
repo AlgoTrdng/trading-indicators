@@ -45,6 +45,10 @@ class MA {
   }
 
   static getSma(numbers, len) {
+    if (len > numbers.length) {
+      return 0;
+    }
+
     return numbers.reduce((total, currentNum) => total + currentNum, 0) / len;
   }
 }

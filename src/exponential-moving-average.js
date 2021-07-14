@@ -7,7 +7,7 @@ class EMA extends MA {
     this._alpha = smoothing / (1 + len);
 
     this._numbers = new Proxy({
-      value: numbers,
+      value: [],
     }, {
       set: (target, prop, value) => {
         let newValue = value;
@@ -23,7 +23,13 @@ class EMA extends MA {
       },
     });
 
-    this._setEmaValue(this._numbers.value);
+    if (numbers.length > len) {
+      numbers.forEach((value) => {
+        this.update(value);
+      });
+    } else {
+      this._setEmaValue(numbers);
+    }
   }
 
   _setEmaValue(numbers) {

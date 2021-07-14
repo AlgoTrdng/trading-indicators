@@ -8,7 +8,7 @@ class WMA extends MA {
     this._setNorm();
 
     this._numbers = new Proxy({
-      value: numbers,
+      value: [],
     }, {
       set: (target, prop, value) => {
         let newValue = value;
@@ -23,7 +23,7 @@ class WMA extends MA {
       },
     });
 
-    this._setWmaValue(this._numbers.value);
+    this._numbers.value = numbers;
   }
 
   _setNorm() {
@@ -41,7 +41,7 @@ class WMA extends MA {
 
     for (let i = 0; i < this._len; i += 1) {
       const weight = this._len - i;
-      wmaValues += this._numbers.value[this._len - i - 1] * weight;
+      wmaValues += numbers[this._len - i - 1] * weight;
     }
 
     this._movingAverage = wmaValues / this._norm;

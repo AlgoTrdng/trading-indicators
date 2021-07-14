@@ -77,4 +77,5 @@ class RSI {
   }
 }
 
+module.exports.wildersEma = wildersEma;
 module.exports = RSI;
