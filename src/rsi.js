@@ -1,6 +1,5 @@
 const MA = require('./moving-average');
-
-const wildersEma = (change, len, prevAvgChange) => ((len - 1) * prevAvgChange + change) / len;
+const EMA = require('./exponential-moving-average');
 
 class RSI {
   constructor({ numbers, len }) {
@@ -66,8 +65,8 @@ class RSI {
 
     const lastChange = this._numbers.value[this._numbers.value.length - 1];
 
-    const avgUp = wildersEma(lastChange > 0 ? Math.abs(lastChange) : 0, this._len, this._prevAvgUp);
-    const avgDown = wildersEma(lastChange < 0 ? Math.abs(lastChange) : 0, this._len, this._prevAvgDown);
+    const avgUp = EMA.wildersEma(lastChange > 0 ? Math.abs(lastChange) : 0, this._len, this._prevAvgUp);
+    const avgDown = EMA.wildersEma(lastChange < 0 ? Math.abs(lastChange) : 0, this._len, this._prevAvgDown);
 
     this._prevAvgUp = avgUp;
     this._prevAvgDown = avgDown;
@@ -77,5 +76,4 @@ class RSI {
   }
 }
 
-module.exports.wildersEma = wildersEma;
 module.exports = RSI;

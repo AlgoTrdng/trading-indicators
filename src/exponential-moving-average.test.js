@@ -70,4 +70,17 @@ describe('Exponential moving average', () => {
 
     expect(ema.getMovingAverage()).to.equal(16.474897119341563);
   });
+
+  it('should return exponential moving average if less than length values are passed as argument and other are passed through update method', () => {
+    const ema = new EMA({
+      numbers: values.slice(0, 3),
+      len: 5,
+    });
+
+    values.slice(3).forEach((value) => {
+      ema.update(value);
+    });
+
+    expect(ema.getMovingAverage()).to.equal(16.474897119341563);
+  });
 });

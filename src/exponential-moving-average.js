@@ -28,7 +28,7 @@ class EMA extends MA {
         this.update(value);
       });
     } else {
-      this._setEmaValue(numbers);
+      this._numbers.value = numbers;
     }
   }
 
@@ -39,6 +39,10 @@ class EMA extends MA {
     }
 
     this._movingAverage = numbers[numbers.length - 1] * this._alpha + this._movingAverage * (1 - this._alpha);
+  }
+
+  static wildersEma(change, len, prevAvgChange) {
+    return ((len - 1) * prevAvgChange + change) / len;
   }
 }
 
