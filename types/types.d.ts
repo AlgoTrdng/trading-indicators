@@ -69,7 +69,7 @@ declare namespace TradingIndicators {
       numbers: number[];
       kLen: number;
       dLen: number;
-    }
+    };
 
     export type StochRSIAverages = [number | null, number | null];
   }
@@ -101,7 +101,7 @@ declare namespace TradingIndicators {
       h: number;
       l: number;
       c: number;
-    }
+    };
   }
 
   export class TR {
@@ -123,7 +123,7 @@ declare namespace TradingIndicators {
     export type Options = {
       candlesticks: TR.Candlestick[];
       len: number;
-    }
+    };
   }
 
   export class ATR {
@@ -138,5 +138,45 @@ declare namespace TradingIndicators {
   
     update(candlestick: TR.Candlestick): number;
     getAtr(): number;
+  }
+
+  export namespace IchimokuCloud {
+    export type Candlestick = {
+      h: number;
+      l: number;
+    };
+
+    export type Options = {
+      candlesticks: Candlestick[];
+      conversionLineLen?: number;
+      baseLineLen?: number;
+      leadingSpanBLen?: number;
+      displacement?: number;
+      doubleInputs?: boolean;
+    };
+
+    export type Spans = {
+      conversionLine: number;
+      baseLine: number;
+      leadingSpanA: number;
+      leadingSpanB: number;
+    };
+  }
+
+  export class IchimokuCloud {
+    constructor({ candlesticks, conversionLineLen, baseLineLen, leadingSpanBLen, displacement, doubleInputs }: IchimokuCloud.Options);
+
+    conversionLineLen: number;
+    baseLineLen: number;
+    leadingSpanBLen: number;
+    displacement: number;
+
+    conversionLine: number;
+    baseLine: number;
+    leadingSpanA: number;
+    leadingSpanB: number;
+
+    update(candlestick: IchimokuCloud.Candlestick): IchimokuCloud.Spans;
+    getSpans(): IchimokuCloud.Spans;
   }
 }

@@ -6,6 +6,7 @@ const RSI = require('./src/rsi');
 const StochRSI = require('./src/stoch-rsi');
 const TR = require('./src/true-range');
 const ATR = require('./src/average-true-range');
+const IchimokuCloud = require('./src/ichimoku-cloud');
 
 module.exports = {
   MA,
@@ -16,4 +17,5 @@ module.exports = {
   StochRSI,
   TR,
   ATR,
+  IchimokuCloud,
 };

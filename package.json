@@ -1,6 +1,6 @@
 {
   "name": "@algo-trading/trading-indicators",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "JS Library for trading indicators",
   "main": "index.js",
   "types": "types/types.d.ts",
