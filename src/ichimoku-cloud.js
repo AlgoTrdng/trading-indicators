@@ -60,7 +60,9 @@ class IchimokuCloud {
       },
     });
 
-    this._candlesticks.value = candlesticks;
+    candlesticks.forEach((candlestick) => {
+      this.update(candlestick);
+    });
   }
 
   update(candlestick) {
