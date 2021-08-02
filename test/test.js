@@ -3,7 +3,7 @@ const Binance = require('binance-api-nodejs');
 // const Ftx = require('ftx-api-nodejs');
 
 // const TR = require('../src/true-range');
-// const ATR = require('../src/average-true-range');
+const ATR = require('../src/average-true-range');
 // const RSI = require('../src/rsi');
 const IchimokuCloud = require('../src/ichimoku-cloud');
 
@@ -17,14 +17,10 @@ const test = async () => {
     // });
     const candlesticks = await binance.spot.candlesticks('BTCUSDT', '1w', { limit: 50000 });
 
-    const _length = 50;
+    const _length = 60;
 
-    const startIndex = 0;
-    const startCandles = candlesticks.slice(0, startIndex).map(({
-      o, h, l, c,
-    }) => ({
-      o, h, l, c,
-    }));
+    const startIndex = _length;
+    const startCandles = candlesticks.slice(0, startIndex);
 
     // const wma = new WMA({
     //   numbers: startCandles,
@@ -35,15 +31,15 @@ const test = async () => {
     //   len: _length,
     // });
 
-    // const atr = new ATR({
-    //   candlesticks: startCandles,
-    //   len: startIndex,
-    // });
-
-    const ichimokuCloud = new IchimokuCloud({
-      candlesticks: [],
-      doubleInputs: true,
+    const atr = new ATR({
+      candlesticks: startCandles,
+      len: startIndex,
     });
+
+    // const ichimokuCloud = new IchimokuCloud({
+    //   candlesticks: [],
+    //   doubleInputs: true,
+    // });
 
     for (let i = startIndex; i < candlesticks.length; i += 1) {
       const {
@@ -52,13 +48,15 @@ const test = async () => {
 
       // wma.update(c);
       // hma.update(c);
-      // console.log(atr.update({ o, h, l, c }), new Date(openTime));
+      console.log(atr.update({
+        o, h, l, c,
+      }), new Date(openTime));
       // atr.update({ o, h, l, c });
       // console.log(), new Date(openTime));
-      console.log(ichimokuCloud.update({
-        h, l,
-      }),
-      new Date(openTime));
+      // console.log(ichimokuCloud.update({
+      //   h, l,
+      // }),
+      // new Date(openTime));
 
     // console.log('MA:', ma.getMovingAverage());
     // console.log('EMA:', ema.getMovingAverage());

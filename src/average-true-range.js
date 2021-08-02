@@ -18,14 +18,14 @@ class ATR {
       },
     });
 
-    this._prevCandlestick = candlesticks[candlesticks.length - 1];
-    const changes = TR.getChanges(candlesticks);
-
-    if (changes.length > len) {
-      changes.forEach((change) => {
-        this.update(change);
+    if (candlesticks.length > len) {
+      candlesticks.forEach((candlestick) => {
+        this.update(candlestick);
       });
     } else {
+      this._prevCandlestick = candlesticks[candlesticks.length - 1];
+      const changes = TR.getChanges(candlesticks);
+
       this._changes.value = changes;
     }
   }
